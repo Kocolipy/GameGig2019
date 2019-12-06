@@ -9,7 +9,7 @@ public class launcher : MonoBehaviour
 {
 
     public GameObject projectile;
-    public Image spot;
+    public GameObject spot;
 
     private float cooldown = 0f;  // Cooldown on bomb throwing
 
@@ -23,8 +23,8 @@ public class launcher : MonoBehaviour
     {
 
         transform.forward = Vector3.right; // Debug
-        spot.GetComponent<Image>().color = Color.green;
-        spot.GetComponent<Image>().enabled = false;
+        spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
+        spot.GetComponent<Renderer>().enabled = false;
         projectile.GetComponent<Renderer>().enabled = false;
 
     }
@@ -48,7 +48,7 @@ public class launcher : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            spot.GetComponent<Image>().enabled = true;
+            spot.GetComponent<Renderer>().enabled = true;
         }
 
         else if (Input.GetKey(KeyCode.LeftShift))
@@ -56,7 +56,7 @@ public class launcher : MonoBehaviour
 
             spot.transform.position = transform.position + transform.forward * travelDistance;
             
-            spot.GetComponent<Image>().color = Color.Lerp(Color.green, Color.red, travelDistance / 20);
+            spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
 
             if (travelDistance > 20)
             {
@@ -88,7 +88,7 @@ public class launcher : MonoBehaviour
         bomb.GetComponent<Renderer>().enabled = true;
         bomb.GetComponent<Rigidbody>().velocity = position - bomb.transform.position;
 
-        spot.GetComponent<Image>().enabled = false;
+        spot.GetComponent<Renderer>().enabled = false;
         spot.transform.position = transform.position;
     }
 
