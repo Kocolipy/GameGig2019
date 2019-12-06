@@ -53,6 +53,28 @@ public class MovementController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        transform.position -= direction;
+        if (collision.collider.tag == "Tower")
+        {
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                collision.gameObject.GetComponent<Tower>().capture(this.gameObject);
+            }
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                collision.gameObject.GetComponent<Tower>().stopCapture();
+            }
+        }
+        else
+        {
+            transform.position -= direction;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        //Exiting range of tower
+        if (collision.collider.tag == "Tower")
+        {
+            collision.gameObject.GetComponent<Tower>().stopCapture();
+        }
     }
 }
