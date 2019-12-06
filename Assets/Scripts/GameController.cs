@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public GameObject HUD;
+    public GameObject launcher1;
+    public GameObject launcher2;
 
     private bool inPlay = true;
     private Text resultText;
@@ -33,7 +35,9 @@ public class GameController : MonoBehaviour
 
         // Initialising players
         player1 = Instantiate(player1, new Vector3(0, 0, -0.1f), Quaternion.identity);
+        launcher1 = Instantiate(launcher1, new Vector3(0, 0, -0.2f), Quaternion.identity, player1.transform);
         player2 = Instantiate(player2, new Vector3(3, 3, 0), Quaternion.identity);
+        launcher2 = Instantiate(launcher2, new Vector3(3, 3, -0.1f), Quaternion.identity, player2.transform);
 
         // Initialising towers
         towers[0] = Instantiate(tower, new Vector3(0, -0.4f, 0), Quaternion.identity);

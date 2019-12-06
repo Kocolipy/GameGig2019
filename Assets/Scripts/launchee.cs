@@ -40,9 +40,9 @@ public class launchee : MonoBehaviour
     {
         if (GetComponent<Rigidbody>().velocity.magnitude == 0 && other.tag == "launcher")
         {
-            GameObject otherObject = other.gameObject;
-            launcher launcherScript = otherObject.GetComponent<launcher>();
-            launcherScript.taunted();
+            GameObject otherObjectParent = other.gameObject.transform.parent.gameObject;
+            Player playerScript = otherObjectParent.GetComponent<Player>();
+            playerScript.stunned();            
             Destroy(gameObject);
         }
     }

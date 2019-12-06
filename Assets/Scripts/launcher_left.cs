@@ -5,7 +5,7 @@ using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class launcher : MonoBehaviour
+public class launcher_left : MonoBehaviour
 {
 
     public GameObject projectile;
@@ -16,8 +16,6 @@ public class launcher : MonoBehaviour
     private float travelDistance = 0f;
     private float travelStep = 0.2f;
 
-    private float taunt = 0f; // Duration left if stunned
-     
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +31,6 @@ public class launcher : MonoBehaviour
     void Update()
     {
 
-        if (taunt > 0)
-        {
-            taunt -= Math.Min(taunt, Time.deltaTime);
-
-        }
-
         Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
         this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
         if (cooldown > 0)
@@ -46,16 +38,16 @@ public class launcher : MonoBehaviour
             cooldown -= Math.Min(cooldown, Time.deltaTime);
         }
 
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        else if (Input.GetKeyDown(KeyCode.RightShift))
         {
             spot.GetComponent<Renderer>().enabled = true;
         }
 
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.RightShift))
         {
 
             spot.transform.position = transform.position + transform.forward * travelDistance;
-            
+
             spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
 
             if (travelDistance > 20)
@@ -66,7 +58,7 @@ public class launcher : MonoBehaviour
             travelDistance += travelStep;
         }
 
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.RightShift))
         {
             dropBomb(spot.transform.position);
         }
@@ -81,7 +73,7 @@ public class launcher : MonoBehaviour
     {
         cooldown = 3f;
         travelDistance = 0f;
-        GameObject bomb = Instantiate(projectile, transform.position, Quaternion.identity, transform) as GameObject;
+        GameObject bomb = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
         launchee bombScript = bomb.GetComponent<launchee>();
         bombScript.target = position;
 
@@ -92,8 +84,4 @@ public class launcher : MonoBehaviour
         spot.transform.position = transform.position;
     }
 
-    public void taunted()
-    {
-        taunt = 3.0f;
-    }
 }
