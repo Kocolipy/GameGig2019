@@ -13,41 +13,35 @@ public class Player : MonoBehaviour
     public string captureKey;
     public string fireKey;
 
+    public Sprite[] sprites = new Sprite[6];
+
     //Stores input from the PlayerInput
     private Vector3[] movementVectors = new Vector3[] {new Vector3(1f, 0f, 0f), new Vector3(0.5f,0.5f,0f),
                         new Vector3(-0.5f,0.5f,0f), new Vector3(-1f,0f,0f), new Vector3(-0.5f,-0.5f,0f), new Vector3(0.5f,-0.5f,0f)};
-    private int d = 0;
+
+    public int d = 0;
     private Vector3 direction;
 
     bool hasMoved;
+
     void Update()
     {
         if (Input.GetKeyDown(leftKey))
         {
-            if (d == 5)
-            {
-                d = 0;
-            }
-            else
-            {
-                d++;
-            }
+           d++;
         }
         if (Input.GetKeyDown(rightKey))
         {
-            if (d == 0)
-            {
-                d = 5;
-            }
-            else
-            {
-                d--;
-            }
+            d--;
         }
+        d = (d % 6 + 6) % 6;
+        this.GetComponent<SpriteRenderer>().sprite = sprites[d];
+
         if (Input.GetKeyDown(forwardKey))
         {
             GetMovementDirection();
         }
+
     }
 
     void GetMovementDirection()
@@ -60,14 +54,13 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.tag == "Tower")
         {
-            Debug.Log("Collision");
-            if (Input.GetKey(captureKey))
+            if (Input.GetKey(captureKey) && (collision.gameObject.GetComponent<Tower>().capturingPlayer == this.gameObject || collision.gameObject.GetComponent<Tower>().capturingPlayer == null))
             {
                 collision.gameObject.GetComponent<Tower>().capture(this.gameObject);
             }
             if (Input.GetKeyUp(captureKey))
             {
-                collision.gameObject.GetComponent<Tower>().stopCapture();
+                collision.gameObject.GetComponent<Tower>().stopCapture(this.gameObject);
             }
         }
         else
@@ -80,7 +73,7 @@ public class Player : MonoBehaviour
         //Exiting range of tower
         if (collision.collider.tag == "Tower")
         {
-            collision.gameObject.GetComponent<Tower>().stopCapture();
+            collision.gameObject.GetComponent<Tower>().stopCapture(this.gameObject);
         }
     }
 }

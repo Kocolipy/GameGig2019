@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3175254131186262490}
   - component: {fileID: 1815817287550907266}
   - component: {fileID: 8502599633195484244}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3175254131186262493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.9963074, y: -0.54829407, z: 0}
-  m_LocalScale: {x: 1.0352, y: 0.9955, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 23bad977132839547971a488d3337fee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0adc6dc8c6dd024468897404b2388433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,18 +96,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016286671, y: -0.18531027}
+  m_Offset: {x: -0.01377482, y: -0.01536582}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.939394}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4579963, y: 0.7795133}
+  m_Size: {x: 0.1565706, y: 0.09053548}
   m_EdgeRadius: 0
 --- !u!114 &1815817287550907266
 MonoBehaviour:
@@ -127,6 +127,14 @@ MonoBehaviour:
   forwardKey: i
   captureKey: k
   fireKey: m
+  sprites:
+  - {fileID: 21300000, guid: 373eb1100e268d54aa982e0349d12c4d, type: 3}
+  - {fileID: 21300000, guid: 2e29e5303cec1ad42a7d7e0d547e111a, type: 3}
+  - {fileID: 21300000, guid: 55ebe3445c20e144393e480762f8d805, type: 3}
+  - {fileID: 21300000, guid: 0adc6dc8c6dd024468897404b2388433, type: 3}
+  - {fileID: 21300000, guid: 1bb0ffce14c04224cab1c7373a6f92fd, type: 3}
+  - {fileID: 21300000, guid: d969ed69cd6f9d34681a25fa0bb8425d, type: 3}
+  d: 3
 --- !u!50 &8502599633195484244
 Rigidbody2D:
   serializedVersion: 4
