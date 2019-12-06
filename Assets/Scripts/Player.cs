@@ -27,45 +27,50 @@ public class Player : MonoBehaviour
     bool hasMoved;
     void Update()
     {
-        if (Input.GetKeyDown(leftKey))
+
+        if (stunDuration > 0)
         {
-            if (d == 5)
-            {
-                d = 0;
-            }
-            else
-            {
-                d++;
-            }
+            Debug.Log("Subtract stun");
+            stunDuration -= Math.Min(stunDuration, Time.deltaTime);
+            Debug.Log(stunDuration);
         }
-        if (Input.GetKeyDown(rightKey))
+        else
         {
-            if (d == 0)
+            if (Input.GetKeyDown(leftKey))
             {
-                d = 5;
+                if (d == 5)
+                {
+                    d = 0;
+                }
+                else
+                {
+                    d++;
+                }
             }
-            else
+            if (Input.GetKeyDown(rightKey))
             {
-                d--;
+                if (d == 0)
+                {
+                    d = 5;
+                }
+                else
+                {
+                    d--;
+                }
             }
-        }
-        if (Input.GetKeyDown(forwardKey))
-        {
-            GetMovementDirection();
+            if (Input.GetKeyDown(forwardKey))
+            {
+                GetMovementDirection();
+            }
         }
     }
 
     void GetMovementDirection()
     {
-        if (stunDuration > 0)
-        {
-            stunDuration -= Math.Min(stunDuration, Time.deltaTime);
-        }
-        else
-        {
-            direction = movementVectors[d];
-            transform.position += direction;
-        }
+        
+        direction = movementVectors[d];
+        transform.forward = direction;
+        transform.position += direction;
 
     }
 
@@ -101,5 +106,6 @@ public class Player : MonoBehaviour
     public void stunned()
     {
         stunDuration = 3f;
+        Debug.Log("stunned");
     }
 }

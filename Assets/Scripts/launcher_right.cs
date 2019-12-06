@@ -20,7 +20,6 @@ public class launcher_right : MonoBehaviour
     void Start()
     {
 
-        transform.forward = Vector3.right; // Debug
         spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
         spot.GetComponent<Renderer>().enabled = false;
         projectile.GetComponent<Renderer>().enabled = false;
@@ -30,7 +29,7 @@ public class launcher_right : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.forward = transform.parent.gameObject.transform.forward;
         Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
         this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
 

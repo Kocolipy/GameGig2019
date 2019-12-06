@@ -10,6 +10,7 @@ public class launcher_left : MonoBehaviour
 
     public GameObject projectile;
     public GameObject spot;
+    public GameObject sprite;
 
     private float cooldown = 0f;  // Cooldown on bomb throwing
 
@@ -19,8 +20,7 @@ public class launcher_left : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        transform.forward = Vector3.right; // Debug
+        
         spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
         spot.GetComponent<Renderer>().enabled = false;
         projectile.GetComponent<Renderer>().enabled = false;
@@ -31,11 +31,16 @@ public class launcher_left : MonoBehaviour
     void Update()
     {
 
-        Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
-        this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
+        transform.forward = transform.parent.gameObject.transform.forward;
+        //Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
+        //this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
         if (cooldown > 0)
         {
-            cooldown -= Math.Min(cooldown, Time.deltaTime);
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0)
+            {
+                sprite.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
 
         else if (Input.GetKeyDown(KeyCode.RightShift))
@@ -48,7 +53,7 @@ public class launcher_left : MonoBehaviour
 
             spot.transform.position = transform.position + transform.forward * travelDistance;
 
-            spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
+            // spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
 
             if (travelDistance > 20)
             {
@@ -72,6 +77,7 @@ public class launcher_left : MonoBehaviour
     void dropBomb(Vector3 position)
     {
         cooldown = 3f;
+        sprite.GetComponent<SpriteRenderer>().enabled = false;
         travelDistance = 0f;
         GameObject bomb = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
         launchee bombScript = bomb.GetComponent<launchee>();

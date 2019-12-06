@@ -6,6 +6,8 @@ TagManager:
   tags:
   - launcher
   - Tower
+  - right
+  - launcher_right
   layers:
   - Default
   - TransparentFX
