@@ -37,6 +37,11 @@ public class GameController : MonoBehaviour
         p1score = HUD.transform.Find("Score1").GetComponent<Text>();
         p2score = HUD.transform.Find("Score2").GetComponent<Text>();
 
+        // Initialising players
+        
+        player1 = Instantiate(player1, new Vector3(0, 0, 0), Quaternion.identity);
+        player2 = Instantiate(player2, new Vector3(3, 3, 0), Quaternion.identity);
+
         // Initialising towers
         towers[0] = Instantiate(tower, new Vector3(10, 0, 0), Quaternion.identity);
         towers[1] = Instantiate(tower, new Vector3(-10, 0, 0), Quaternion.identity);
