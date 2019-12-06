@@ -83,7 +83,7 @@ public class launcher : MonoBehaviour
         travelDistance = 0f;
         GameObject bomb = Instantiate(projectile, transform.position, Quaternion.identity, transform) as GameObject;
         launchee bombScript = bomb.GetComponent<launchee>();
-        bombScript.position = position;
+        bombScript.target = position;
 
         bomb.GetComponent<Renderer>().enabled = true;
         bomb.GetComponent<Rigidbody>().velocity = position - bomb.transform.position;

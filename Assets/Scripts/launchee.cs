@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class launchee : MonoBehaviour
 {
-    public Vector3 position;
+    public Vector3 target;
+    public float timeToDespawn = 5f; 
 
     // Start is called before the first frame update
     void Start()
@@ -16,9 +17,15 @@ public class launchee : MonoBehaviour
     void Update()
     {
     
-        if ((transform.position - position).magnitude < 0.5)
+        if ((transform.position - target).magnitude < 0.5)
         {
             this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        } else if (timeToDespawn <= 0)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            timeToDespawn -= Time.deltaTime;
         }
     }
 
