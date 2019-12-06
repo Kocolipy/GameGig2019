@@ -34,9 +34,9 @@ public class GameController : MonoBehaviour
         resultText = HUD.transform.Find("Results").GetComponent<Text>();
 
         // Initialising players
-        player1 = Instantiate(player1, new Vector3(-6, -1, -0.1f), Quaternion.identity);
+        player1 = Instantiate(player1, new Vector3(-6, -0.9f, -0.1f), Quaternion.identity);
         launcher1 = Instantiate(launcher1, new Vector3(-6, -1, -0.2f), Quaternion.identity, player1.transform);
-        player2 = Instantiate(player2, new Vector3( 6, -0.5f, -0.1f), Quaternion.identity);
+        player2 = Instantiate(player2, new Vector3( 6, -0.9f, -0.1f), Quaternion.identity);
         launcher2 = Instantiate(launcher2, new Vector3( 6, -0.5f, -0.2f), Quaternion.identity, player2.transform);
 
         // Initialising towers

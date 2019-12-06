@@ -12,6 +12,7 @@ public class Tower : MonoBehaviour
     private Image fillImg;
     
     private bool capturing = false;
+    public GameObject capturingPlayer = null;
     private Color capturingcolor;
     private GameObject owner = null;
     private Color ownercolor = new Color(0f, 0f, 0f, 0f);
@@ -45,7 +46,6 @@ public class Tower : MonoBehaviour
         }
     }
 
-
     public void capture(GameObject player)
     {
         if (owner != player)
@@ -58,6 +58,7 @@ public class Tower : MonoBehaviour
                 fillImg.GetComponent<Image>().color = new Color32(255, 255, 225, 200);
                 time = captureTime;
                 capturing = true;
+                capturingPlayer = player;
 
                 capturingcolor = player.GetComponent<Player>().color;
                 capturingcolor.a = 0f;
@@ -66,7 +67,6 @@ public class Tower : MonoBehaviour
             {
                 if (time > 0)
                 {
-
                     time -= Time.deltaTime;
                     fillImg.fillAmount = 1 - time / captureTime;
                     capturingcolor.a = 1 - time / captureTime;
@@ -77,19 +77,25 @@ public class Tower : MonoBehaviour
                 {
                     timeText.text = "";
                     fillImg.fillAmount = 0;
-                    owner = player;
+                    owner = capturingPlayer;
                     ownercolor = capturingcolor;
                     Debug.Log("Captured by " + owner.name);
                     captureCount = captureDuration;
+                    capturingPlayer = null;
+                    capturing = false;
                 }
             }
         }
     }
-    public void stopCapture()
+    public void stopCapture(GameObject player)
     {
-        timeText.text = "";
-        fillImg.fillAmount = 0;
-        barrier.GetComponent<Renderer>().material.color = ownercolor;
-        capturing = false;
+        if (capturingPlayer == player || (owner != player && owner != null))
+        {
+            timeText.text = "";
+            fillImg.fillAmount = 0;
+            barrier.GetComponent<Renderer>().material.color = ownercolor;
+            capturing = false;
+            capturingPlayer = null;
+        }
     }
 }
