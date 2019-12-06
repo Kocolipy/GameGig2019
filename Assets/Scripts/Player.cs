@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -7,6 +8,10 @@ public class Player : MonoBehaviour
 {
     public Color color;
 
+    private float stunDuration = 0f;
+
+    // Use this for initialization
+    void Start() {}
     public string leftKey;
     public string rightKey;
     public string forwardKey;
@@ -46,8 +51,16 @@ public class Player : MonoBehaviour
 
     void GetMovementDirection()
     {
-        direction = movementVectors[d];
-        transform.position += direction;
+        if (stunDuration > 0)
+        {
+            stunDuration -= Math.Min(stunDuration, Time.deltaTime);
+        }
+        else
+        {
+            direction = movementVectors[d];
+            transform.position += direction;
+        }
+
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -58,7 +71,8 @@ public class Player : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Tower>().capture(this.gameObject);
             }
-            if (Input.GetKeyUp(captureKey))
+
+            if (Input.GetKeyUp(captureKey) || stunDuration > 0)
             {
                 collision.gameObject.GetComponent<Tower>().stopCapture(this.gameObject);
             }
@@ -71,9 +85,14 @@ public class Player : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         //Exiting range of tower
-        if (collision.collider.tag == "Tower")
+        if (collision.collider.tag == "Tower" || stunDuration > 0)
         {
             collision.gameObject.GetComponent<Tower>().stopCapture(this.gameObject);
         }
+    }
+
+    public void stunned()
+    {
+        stunDuration = 3f;
     }
 }
