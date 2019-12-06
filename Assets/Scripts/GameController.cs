@@ -32,15 +32,15 @@ public class GameController : MonoBehaviour
         resultText = HUD.transform.Find("Results").GetComponent<Text>();
 
         // Initialising players
-        player1 = Instantiate(player1, new Vector3(0, 0, -0.1f), Quaternion.identity);
-        player2 = Instantiate(player2, new Vector3(3, 3, 0), Quaternion.identity);
+        player1 = Instantiate(player1, new Vector3(-6, -1, -0.1f), Quaternion.identity);
+        player2 = Instantiate(player2, new Vector3( 6, -0.5f, -0.1f), Quaternion.identity);
 
         // Initialising towers
         towers[0] = Instantiate(tower, new Vector3(0, -0.4f, 0), Quaternion.identity);
         towers[1] = Instantiate(tower, new Vector3(-5f, -4.3f, 0), Quaternion.identity);
         towers[1] = Instantiate(tower, new Vector3(5f, -4.3f, 0), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(-5f, 4.3f, 0), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(5f, 4.3f, 0), Quaternion.identity);
+        towers[1] = Instantiate(tower, new Vector3(-5f, 3.6f, 0), Quaternion.identity);
+        towers[1] = Instantiate(tower, new Vector3(5f, 3.6f, 0), Quaternion.identity);
 
         // Initialising Scores
         score[player1.name] = 0;

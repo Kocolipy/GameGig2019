@@ -1,46 +1,78 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
-    public float speed;                //Floating point variable to store the player's movement speed.
-    private Rigidbody2D rb2d;        //Store a reference to the Rigidbody2D component required to use 2D Physics.
-
     public Color color;
 
-    // Use this for initialization
-    void Start()
+    public string leftKey;
+    public string rightKey;
+    public string forwardKey;
+    public string captureKey;
+    public string fireKey;
+
+    //Stores input from the PlayerInput
+    private Vector3[] movementVectors = new Vector3[] {new Vector3(1f, 0f, 0f), new Vector3(0.5f,0.5f,0f),
+                        new Vector3(-0.5f,0.5f,0f), new Vector3(-1f,0f,0f), new Vector3(-0.5f,-0.5f,0f), new Vector3(0.5f,-0.5f,0f)};
+    private int d = 0;
+    private Vector3 direction;
+
+    bool hasMoved;
+    void Update()
     {
-        //Get and store a reference to the Rigidbody2D component so that we can access it.
-        rb2d = GetComponent<Rigidbody2D>();
+        if (Input.GetKeyDown(leftKey))
+        {
+            if (d == 5)
+            {
+                d = 0;
+            }
+            else
+            {
+                d++;
+            }
+        }
+        if (Input.GetKeyDown(rightKey))
+        {
+            if (d == 0)
+            {
+                d = 5;
+            }
+            else
+            {
+                d--;
+            }
+        }
+        if (Input.GetKeyDown(forwardKey))
+        {
+            GetMovementDirection();
+        }
     }
 
-    //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
-    void FixedUpdate()
+    void GetMovementDirection()
     {
-        //Store the current horizontal input in the float moveHorizontal.
-        float moveHorizontal = Input.GetAxis("Horizontal");
-
-        //Use the two store floats to create a new Vector2 variable movement.
-        Vector2 movement = new Vector2(moveHorizontal, 0);
-
-        //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-        rb2d.AddForce(movement * speed);
+        direction = movementVectors[d];
+        transform.position += direction;
     }
-    private void OnCollisionStay2D(Collision2D collision)
+
+    void OnCollisionStay2D(Collision2D collision)
     {
-        //Capturing tower
         if (collision.collider.tag == "Tower")
         {
-            if (Input.GetKey(KeyCode.DownArrow))
+            Debug.Log("Collision");
+            if (Input.GetKey(captureKey))
             {
                 collision.gameObject.GetComponent<Tower>().capture(this.gameObject);
             }
-            if (Input.GetKeyUp(KeyCode.DownArrow))
+            if (Input.GetKeyUp(captureKey))
             {
                 collision.gameObject.GetComponent<Tower>().stopCapture();
             }
+        }
+        else
+        {
+            transform.position -= direction;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
