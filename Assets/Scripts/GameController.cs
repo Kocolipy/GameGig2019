@@ -16,11 +16,11 @@ public class GameController : MonoBehaviour
     private Text resultText;
 
     // Game Timer
-    private int gameTime = 100;
+    private int gameTime = 60;
     private Text gameTimeText;
 
     // Towers
-    private GameObject[] towers = new GameObject[2];
+    private GameObject[] towers = new GameObject[5];
     
     // Scores
     Dictionary<string, int> score = new Dictionary<string, int>();
@@ -42,9 +42,9 @@ public class GameController : MonoBehaviour
         // Initialising towers
         towers[0] = Instantiate(tower, new Vector3(0, -0.4f, 0), Quaternion.identity);
         towers[1] = Instantiate(tower, new Vector3(-5f, -4.3f, 0), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(5f, -4.3f, 0), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(-5f, 3.6f, 0), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(5f, 3.6f, 0), Quaternion.identity);
+        towers[2] = Instantiate(tower, new Vector3(5f, -4.3f, 0), Quaternion.identity);
+        towers[3] = Instantiate(tower, new Vector3(-5f, 3.6f, 0), Quaternion.identity);
+        towers[4] = Instantiate(tower, new Vector3(5f, 3.6f, 0), Quaternion.identity);
 
         // Initialising Scores
         score[player1.name] = 0;

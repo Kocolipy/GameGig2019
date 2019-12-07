@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
                         new Vector3(-0.5f,0.5f,0f), new Vector3(-1f,0f,0f), new Vector3(-0.5f,-0.5f,0f), new Vector3(0.5f,-0.5f,0f)};
 
     public int d = 0;
-    private Vector3 direction;
+    public Vector3 direction;
 
     bool hasMoved;
 
@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
     {
         
         direction = movementVectors[d];
-        transform.forward = direction;
         transform.position += direction;
 
     }

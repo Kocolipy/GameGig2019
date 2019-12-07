@@ -30,8 +30,8 @@ public class launcher_left : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.forward = transform.parent.gameObject.transform.forward;
+        Player playerScript = transform.parent.gameObject.GetComponent<Player>();
+        transform.forward = playerScript.direction;
         //Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
         //this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
         if (cooldown > 0)
@@ -53,7 +53,7 @@ public class launcher_left : MonoBehaviour
 
             spot.transform.position = transform.position + transform.forward * travelDistance;
 
-            // spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
+            spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
 
             if (travelDistance > 20)
             {

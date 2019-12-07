@@ -10,6 +10,7 @@ public class launcher_right : MonoBehaviour
 
     public GameObject projectile;
     public GameObject spot;
+    public GameObject sprite;
 
     private float cooldown = 0f;  // Cooldown on bomb throwing
 
@@ -20,7 +21,7 @@ public class launcher_right : MonoBehaviour
     void Start()
     {
 
-        spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
+        //spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
         spot.GetComponent<Renderer>().enabled = false;
         projectile.GetComponent<Renderer>().enabled = false;
 
@@ -29,13 +30,19 @@ public class launcher_right : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.forward = transform.parent.gameObject.transform.forward;
+
+        Player playerScript = transform.parent.gameObject.GetComponent<Player>();
+        transform.forward = playerScript.direction;
         Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
-        this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
+        // this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
 
         if (cooldown > 0)
         {
-            cooldown -= Math.Min(cooldown, Time.deltaTime);
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0)
+            {
+                sprite.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
 
         else if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -72,6 +79,7 @@ public class launcher_right : MonoBehaviour
     void dropBomb(Vector3 position)
     {
         cooldown = 3f;
+        sprite.GetComponent<SpriteRenderer>().enabled = false;
         travelDistance = 0f;
         GameObject bomb = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
         launchee bombScript = bomb.GetComponent<launchee>();

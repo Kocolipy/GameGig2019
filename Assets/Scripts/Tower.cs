@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour
     private GameObject owner = null;
     private Color ownercolor = new Color(0f, 0f, 0f, 0f);
 
-    private float captureDuration = 10;
+    private float captureDuration = 20;
     private float captureCount;
 
     void Start()
