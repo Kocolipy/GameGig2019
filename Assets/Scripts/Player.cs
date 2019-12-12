@@ -8,16 +8,13 @@ public class Player : MonoBehaviour
 {
     public Color color;
 
-    private float stunDuration = 0f;
-
-    // Use this for initialization
-    void Start() {}
     public string leftKey;
     public string rightKey;
     public string forwardKey;
     public string captureKey;
     public string fireKey;
 
+    public GameObject launcher;
     public Sprite[] sprites = new Sprite[6];
 
     //Stores input from the PlayerInput
@@ -26,12 +23,18 @@ public class Player : MonoBehaviour
 
     public int d = 0;
     public Vector3 direction = Vector3.zero;
+    public float stunDuration = 0f;
 
     bool hasMoved;
 
+    // Use this for initialization
+    void Start()
+    {
+        launcher = Instantiate(launcher, this.transform.position - movementVectors[d] * 0.3f + new Vector3(0,0.1f,-0.1f), Quaternion.identity, this.transform);
+    }
     void Update()
     {
-
+        launcher.transform.position = transform.position - movementVectors[d] * 0.3f + new Vector3(0, 0.1f, -0.1f);
         if (stunDuration > 0)
         {
             Debug.Log("Stunned");
@@ -64,7 +67,6 @@ public class Player : MonoBehaviour
     void GetMovementDirection()
     {
         transform.position += direction;
-
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -79,6 +81,14 @@ public class Player : MonoBehaviour
             if (Input.GetKeyUp(captureKey) || stunDuration > 0)
             {
                 collision.gameObject.GetComponent<Tower>().stopCapture(this.gameObject);
+            }
+        }
+        else if (collision.collider.tag == "Projectile")
+        {
+            if (collision.gameObject.GetComponent<launchee>().landed)
+            {
+                stunned();
+                Destroy(collision.gameObject);
             }
         }
         else

@@ -5,52 +5,45 @@ using UnityEngine;
 public class launchee : MonoBehaviour
 {
     public Vector3 target;
-    private bool landed = false;
-    private float timeToDespawn = 5f; 
+    public bool landed = false;
+    private float speed = 0.3f;
+    private float timeToDespawn = 2f; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (!landed && (transform.position - target).magnitude < 0.5)
+        if (!landed)
         {
-            this.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            landed = true;
-
-        }
-        
-        if (landed && timeToDespawn <= 0)
-        { 
-            Destroy(gameObject);
-        }
-
-        if (landed && timeToDespawn > 0)
+            if ((target - transform.position).magnitude > 0.5)
+            {
+                transform.position += Vector3.Normalize(target - transform.position) * speed;
+            } 
+            else
+            {
+                landed = true;
+            }
+        } 
+        else
         {
-            timeToDespawn -= Time.deltaTime;
+            if (timeToDespawn <= 0)
+            {
+                Destroy(gameObject);
+            }   
+            else
+            {
+                timeToDespawn -= Time.deltaTime;
+            }
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void move(Vector3 loc)
     {
-        foreach (ContactPoint contact in collision.contacts)
-    
-        {
-            Collider other = contact.otherCollider;
-            Debug.Log(other);
-            if (GetComponent<Rigidbody2D>().velocity.magnitude == 0 && other.tag == "Player")
-            {
-                Debug.Log("Collision!!");
-                //GameObject otherObjectParent = other.gameObject.transform.parent.gameObject;
-                Player playerScript = other.gameObject.GetComponent<Player>();
-                playerScript.stunned();
-                Destroy(gameObject);
-            }
-        }
+        this.GetComponent<Renderer>().enabled = true;
+        target = loc;
     }
 }

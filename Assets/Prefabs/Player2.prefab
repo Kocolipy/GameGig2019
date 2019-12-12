@@ -122,11 +122,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0.3176471, g: 0.39577523, b: 1, a: 0}
-  leftKey: j
-  rightKey: l
-  forwardKey: i
-  captureKey: k
-  fireKey: m
+  leftKey: left
+  rightKey: right
+  forwardKey: up
+  captureKey: down
+  fireKey: space
+  launcher: {fileID: 3827415224948387401, guid: 41e76c3a9946e854abca5b0a9b2360ba,
+    type: 3}
   sprites:
   - {fileID: 21300000, guid: 373eb1100e268d54aa982e0349d12c4d, type: 3}
   - {fileID: 21300000, guid: 2e29e5303cec1ad42a7d7e0d547e111a, type: 3}

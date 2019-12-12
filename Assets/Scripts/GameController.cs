@@ -9,8 +9,6 @@ public class GameController : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public GameObject HUD;
-    public GameObject launcher1;
-    public GameObject launcher2;
 
     private bool inPlay = true;
     private Text resultText;
@@ -35,16 +33,14 @@ public class GameController : MonoBehaviour
 
         // Initialising players
         player1 = Instantiate(player1, new Vector3(-6, -0.9f, -0.1f), Quaternion.identity);
-        launcher1 = Instantiate(launcher1, new Vector3(-6, -1, -0.2f), Quaternion.identity, player1.transform);
         player2 = Instantiate(player2, new Vector3( 6, -0.9f, -0.1f), Quaternion.identity);
-        launcher2 = Instantiate(launcher2, new Vector3( 6, -0.5f, -0.2f), Quaternion.identity, player2.transform);
 
         // Initialising towers
-        towers[0] = Instantiate(tower, new Vector3(0, -0.4f, -.5f), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(-5f, -4.3f, -.5f), Quaternion.identity);
-        towers[2] = Instantiate(tower, new Vector3(5f, -4.3f, -.5f), Quaternion.identity);
-        towers[3] = Instantiate(tower, new Vector3(-5f, 3.6f, -.5f), Quaternion.identity);
-        towers[4] = Instantiate(tower, new Vector3(5f, 3.6f, -.5f), Quaternion.identity);
+        towers[0] = Instantiate(tower, new Vector3(0, -0.4f, -.05f), Quaternion.identity);
+        towers[1] = Instantiate(tower, new Vector3(-5f, -4.3f, -.05f), Quaternion.identity);
+        towers[2] = Instantiate(tower, new Vector3(5f, -4.3f, -.05f), Quaternion.identity);
+        towers[3] = Instantiate(tower, new Vector3(-5f, 3.6f, -.05f), Quaternion.identity);
+        towers[4] = Instantiate(tower, new Vector3(5f, 3.6f, -.05f), Quaternion.identity);
 
         // Initialising Scores
         score[player1.name] = 0;

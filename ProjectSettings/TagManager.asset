@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - launcher
   - Tower
-  - right
-  - launcher_right
+  - Projectile
   layers:
   - Default
   - TransparentFX

@@ -377,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeCanvas: {fileID: 2189168521380260107}
   barrier: {fileID: 7853459664346218930}
+  capturingPlayer: {fileID: 0}
 --- !u!1 &7853459664346218930
 GameObject:
   m_ObjectHideFlags: 0

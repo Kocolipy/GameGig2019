@@ -126,7 +126,9 @@ MonoBehaviour:
   rightKey: d
   forwardKey: w
   captureKey: s
-  fireKey: z
+  fireKey: left shift
+  launcher: {fileID: 3827415224948387401, guid: 41e76c3a9946e854abca5b0a9b2360ba,
+    type: 3}
   sprites:
   - {fileID: 21300000, guid: fc9116ccfda17db439c5c30ec187dc39, type: 3}
   - {fileID: 21300000, guid: 03411f0c61a820a4685a02009eba7f50, type: 3}
