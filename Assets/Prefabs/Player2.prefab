@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8502599633195484244}
   m_Layer: 9
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +108,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.1565706, y: 0.09053548}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 1
 --- !u!114 &1815817287550907266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1bb0ffce14c04224cab1c7373a6f92fd, type: 3}
   - {fileID: 21300000, guid: d969ed69cd6f9d34681a25fa0bb8425d, type: 3}
   d: 3
+  direction: {x: 0, y: 0, z: 0}
 --- !u!50 &8502599633195484244
 Rigidbody2D:
   serializedVersion: 4

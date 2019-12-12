@@ -20,7 +20,7 @@ public class launchee : MonoBehaviour
         
         if (!landed && (transform.position - target).magnitude < 0.5)
         {
-            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            this.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             landed = true;
 
         }
@@ -36,14 +36,21 @@ public class launchee : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        if (GetComponent<Rigidbody>().velocity.magnitude == 0 && other.tag == "launcher")
+        foreach (ContactPoint contact in collision.contacts)
+    
         {
-            GameObject otherObjectParent = other.gameObject.transform.parent.gameObject;
-            Player playerScript = otherObjectParent.GetComponent<Player>();
-            playerScript.stunned();            
-            Destroy(gameObject);
+            Collider other = contact.otherCollider;
+            Debug.Log(other);
+            if (GetComponent<Rigidbody2D>().velocity.magnitude == 0 && other.tag == "Player")
+            {
+                Debug.Log("Collision!!");
+                //GameObject otherObjectParent = other.gameObject.transform.parent.gameObject;
+                Player playerScript = other.gameObject.GetComponent<Player>();
+                playerScript.stunned();
+                Destroy(gameObject);
+            }
         }
     }
 }

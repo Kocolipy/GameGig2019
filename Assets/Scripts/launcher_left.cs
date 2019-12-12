@@ -12,6 +12,8 @@ public class launcher_left : MonoBehaviour
     public GameObject spot;
     public GameObject sprite;
 
+    private Vector3 direction;
+
     private float cooldown = 0f;  // Cooldown on bomb throwing
 
     private float travelDistance = 0f;
@@ -31,7 +33,7 @@ public class launcher_left : MonoBehaviour
     void Update()
     {
         Player playerScript = transform.parent.gameObject.GetComponent<Player>();
-        transform.forward = playerScript.direction;
+        direction = playerScript.direction.normalized;
         //Color myColor = Color.Lerp(Color.green, Color.red, cooldown / 3f);
         //this.GetComponent<Renderer>().material.SetColor("_EmissionColor", myColor);
         if (cooldown > 0)
@@ -51,7 +53,7 @@ public class launcher_left : MonoBehaviour
         else if (Input.GetKey(KeyCode.RightShift))
         {
 
-            spot.transform.position = transform.position + transform.forward * travelDistance;
+            spot.transform.position = transform.position + direction * travelDistance;
 
             spot.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.green, Color.red, travelDistance / 20));
 

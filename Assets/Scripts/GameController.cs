@@ -40,11 +40,11 @@ public class GameController : MonoBehaviour
         launcher2 = Instantiate(launcher2, new Vector3( 6, -0.5f, -0.2f), Quaternion.identity, player2.transform);
 
         // Initialising towers
-        towers[0] = Instantiate(tower, new Vector3(0, -0.4f, 0), Quaternion.identity);
-        towers[1] = Instantiate(tower, new Vector3(-5f, -4.3f, 0), Quaternion.identity);
-        towers[2] = Instantiate(tower, new Vector3(5f, -4.3f, 0), Quaternion.identity);
-        towers[3] = Instantiate(tower, new Vector3(-5f, 3.6f, 0), Quaternion.identity);
-        towers[4] = Instantiate(tower, new Vector3(5f, 3.6f, 0), Quaternion.identity);
+        towers[0] = Instantiate(tower, new Vector3(0, -0.4f, -.5f), Quaternion.identity);
+        towers[1] = Instantiate(tower, new Vector3(-5f, -4.3f, -.5f), Quaternion.identity);
+        towers[2] = Instantiate(tower, new Vector3(5f, -4.3f, -.5f), Quaternion.identity);
+        towers[3] = Instantiate(tower, new Vector3(-5f, 3.6f, -.5f), Quaternion.identity);
+        towers[4] = Instantiate(tower, new Vector3(5f, 3.6f, -.5f), Quaternion.identity);
 
         // Initialising Scores
         score[player1.name] = 0;

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
                         new Vector3(-0.5f,0.5f,0f), new Vector3(-1f,0f,0f), new Vector3(-0.5f,-0.5f,0f), new Vector3(0.5f,-0.5f,0f)};
 
     public int d = 0;
-    public Vector3 direction;
+    public Vector3 direction = Vector3.zero;
 
     bool hasMoved;
 
@@ -34,9 +34,8 @@ public class Player : MonoBehaviour
 
         if (stunDuration > 0)
         {
-            Debug.Log("Subtract stun");
+            Debug.Log("Stunned");
             stunDuration -= Math.Min(stunDuration, Time.deltaTime);
-            Debug.Log(stunDuration);
         }
         else
         {
@@ -51,6 +50,8 @@ public class Player : MonoBehaviour
             d = (d % 6 + 6) % 6;
             this.GetComponent<SpriteRenderer>().sprite = sprites[d];
 
+            direction = movementVectors[d];
+
             if (Input.GetKeyDown(forwardKey))
             {
                 GetMovementDirection();
@@ -62,8 +63,6 @@ public class Player : MonoBehaviour
 
     void GetMovementDirection()
     {
-        
-        direction = movementVectors[d];
         transform.position += direction;
 
     }
